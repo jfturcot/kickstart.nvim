@@ -2,4 +2,16 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  vim.keymap.set('n', '<leader>bc', function()
+    local path = vim.fn.expand '%:.'
+    vim.fn.setreg('+', path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+  end, { desc = 'Copy relative path of the buffer to clipboard' }),
+
+  vim.keymap.set('n', '<leader>bca', function()
+    local path = vim.fn.expand '%'
+    vim.fn.setreg('+', path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+  end, { desc = 'Copy absolute path of the buffer to clipboard' }),
+}
