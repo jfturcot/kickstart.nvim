@@ -14,5 +14,12 @@ return {
     if vim.fn.executable 'nvr' == 1 then
       env.GIT_EDITOR = "nvr --remote-wait +'set bufhidden=delete'"
     end
+
+    -- Clean up buffers on exit
+    vim.g.lazygit_on_exit_callback = function()
+      vim.schedule(function()
+        vim.cmd('checktime')
+      end)
+    end
   end,
 }
